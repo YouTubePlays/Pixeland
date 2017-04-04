@@ -1,0 +1,18 @@
+@(numPeople:Long)(implicit r: Request[_])
+
+@main("Welcome to Play") {
+	<div id="tools" class="land-container pixelated" ng-app="pixeland" ng-controller="CanvasContoller as pixelandCtrl" ng-init="pixelandCtrl.init('@routes.PixelsController.ws.webSocketURL()')">
+		<div id="container" class="land-container pixelated">
+	  		<canvas id="pixeland" width="1000" height="1000"></canvas>
+	  	</div>
+	  	<div style="position: absolute; left: 50%; top:0">
+	    	<div id="peopleCount" class="peopleCount"> Online: @numPeople </div>
+	    </div>
+	  	<div id="colors" class="color" =>
+	  		<div id="colors-row-{{i+1}}" class="color-row" ng-repeat="i in [1,2]">
+		  		<div id="colors-cell-{{j+1}}" class="color-cell" ng-click="pixelandCtrl.color = pixelandCtrl.colorUtilities.colors[i-1][j-1]" ng-repeat="j in [1,2,3,4,5,6,7,8,9,10]" style="background-color:{{pixelandCtrl.colorUtilities.toRGBcss(pixelandCtrl.colorUtilities.colors[i-1][j-1])}}">
+		  		</div>
+	  		</div>
+	  	</div>
+  	</div>
+}
